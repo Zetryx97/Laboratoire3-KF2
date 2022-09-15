@@ -4,6 +4,16 @@
 
 class Odomètre:
 
+    DISTANCE_PAR_TRANSITION = None #à modifier 
 
     def __init__(self):
         pass
+
+
+
+    def avancer_distance(distance_à_parcourir):
+        return None
+
+
+    def attendre():
+        return None
