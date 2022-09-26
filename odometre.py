@@ -15,7 +15,7 @@ class Odomètre:
 
     def __init__(self, num_broche_gauche, num_broche_droite):
         self.DISTANCE_TRANSITION = 0.55
-        self.NB_TRANSITION_FREINAGE = 40
+        self.NB_TRANSITION_FREINAGE = 8
         self.encodeur_gauche = gpiozero.DigitalInputDevice(num_broche_gauche)
         self.encodeur_droit = gpiozero.DigitalInputDevice(num_broche_droite)
         self.evenement = threading.Event()
