@@ -15,13 +15,13 @@ class Odomètre:
 
     def __init__(self, num_broche_gauche, num_broche_droite):
         self.DISTANCE_TRANSITION = 0.55
+        self.NB_TRANSITION_FREINAGE = 40
         self.encodeur_gauche = gpiozero.DigitalInputDevice(num_broche_gauche)
         self.encodeur_droit = gpiozero.DigitalInputDevice(num_broche_droite)
         self.evenement = threading.Event()
         self.moteur = Moteur()
         self.nb_transition_gauche = 0
         self.nb_transition_droit = 0
-        self.nb_transition_freinage = 40
 
     def augmenter_nb_transition_gauche(self):
         self.nb_transition_gauche += 1
@@ -34,7 +34,7 @@ class Odomètre:
         self.encodeur_gauche.when_deactivated = self.augmenter_nb_transition_gauche
         self.encodeur_droit.when_activated = self.augmenter_nb_transition_droit
         self.encodeur_droit.when_deactivated = self.augmenter_nb_transition_droit
-        nb_transition_a_faire = nb_transition_a_faire - self.nb_transition_freinage
+        nb_transition_a_faire = nb_transition_a_faire - self.NB_TRANSITION_FREINAGE
         while self.nb_transition_droit < nb_transition_a_faire and self.nb_transition_gauche < nb_transition_a_faire:
             sleep(0.01)
         self.evenement.set()
